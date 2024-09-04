@@ -12,8 +12,18 @@ import {
 import { Input } from "postcss";
 import { Button } from "../ui/button";
 import Image from "next/image";
+import { signIn } from "next-auth/react";
 
 export default function LoginModal() {
+
+    const handleLogin = () => {
+        signIn("google", {
+            callbackUrl: "/dashboard",
+            redirect: true
+        }
+        );
+    };
+
     return (
         <Dialog>
             <DialogTrigger asChild>
@@ -26,7 +36,7 @@ export default function LoginModal() {
                         QuickChat makes it effortless to create secure chat links and start conversations in seconds.
                     </DialogDescription>
                 </DialogHeader>
-                <Button variant="outline">
+                <Button variant="outline" onClick={handleLogin}>
                     <Image
                         src="/images/google.png"
                         className="mr-4"
